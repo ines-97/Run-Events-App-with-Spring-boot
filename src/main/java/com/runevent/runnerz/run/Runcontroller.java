@@ -9,14 +9,18 @@ import java.util.List;
 @RestController
 public class Runcontroller {
 
-    private final RunRepository runRepository;
+    private final RunRepository runRepository; // call to the repository
 
     public Runcontroller(RunRepository runRepository){
         this.runRepository= runRepository;
     }
 
-    @GetMapping("/api/runs")
+    @GetMapping("/api/runs") //url
     List<Run> findAll(){
+        return runRepository.findAll();
+    }
+    @GetMapping("/api/runs") //url
+    List<Run> findById(){
         return runRepository.findAll();
     }
 }
