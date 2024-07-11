@@ -47,6 +47,18 @@ public class RunRepository {
         runs.add(run);
     }
 
+    //modify
+    public void update (Run run , Integer id){
+        Optional <Run> o= findById(id);
+        if(o.isPresent()){
+            runs.set(runs.indexOf(o.get()),run);
+        }
+    }
+
+    //delete
+    public void delete(Integer id){
+        runs.removeIf(d->d.id().equals(id));
+    }
 
 @PostConstruct
 private void init(){
