@@ -1,5 +1,6 @@
 package com.runevent.runnerz.run;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -43,17 +44,22 @@ public class Runcontroller {
         return o.get();
     }
 //post-add
-    @ResponseStatus(HttpStatus.CREATED)//montione the status of http request(created....)
+    @ResponseStatus(HttpStatus.CREATED)//- 200 created- montione the status of http request(created....)
     @PostMapping("")//url
-    public void create (@RequestBody Run run){
+    public void create (@Valid @RequestBody Run run){ //@valid to use validation dependacy from Run record
         runRepository.create(run);
 }
     //put-modify
-    //@ResponseStatus(HttpStatus.NO_CONTENT)//no
-    @PutMapping("/{id}")
+    //@ResponseStatus(HttpStatus.NO_CONTENT)//200 no content
+    @PutMapping("m/{id}")
     public void update (@RequestBody Run run,@PathVariable Integer id){
         runRepository.update(run,id);
     }
 
     //delete-delete
+    @ResponseStatus(HttpStatus.NO_CONTENT)//no
+    @DeleteMapping("d/{id}")
+    public void delete (@PathVariable Integer id){
+        runRepository.delete(id);
+    }
 }
